@@ -73,6 +73,38 @@
       "api": "https://wwzy.tv/api.php/provide/vod",
       "name": "旺旺短剧"
     },
+    "xinba": {
+      "api": "https://xingba111.com/api.php/provide/vod",
+      "name": "xinba"
+    },
+     "tianya": {
+      "api": "https://tyyszyapi.com/api.php/provide/vod",
+      "name": "tianya"
+    },
+     "yutu": {
+      "api": "https://apiyutu.com/api.php/provide/vod",
+      "name": "yutu"
+    },
+     "haohua": {
+      "api": "https://hhzyapi.com/api.php/provide/vod",
+      "name": "haohua"
+    },
+     "baidu": {
+      "api": "https://api.apibdzy.com/api.php/provide/vod",
+      "name": "baidu"
+    },
+     "uku": {
+      "api": "https://api.ukuapi88.com/api.php/provide/vod",
+      "name": "uku"
+    },
+    "danai": {
+      "api": "https://apidanaizi.com/api.php/provide/vod",
+      "name": "danai"
+    },
+     "ipi": {
+      "api": "https://iqiyizyapi.com/api.php/provide/vod",
+      "name": "ipi"
+    },
     "ikun": {
       "api": "https://ikunzyapi.com/api.php/provide/vod",
       "name": "iKun资源"
