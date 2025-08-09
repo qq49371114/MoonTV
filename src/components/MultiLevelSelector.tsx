@@ -17,7 +17,7 @@ interface MultiLevelCategory {
 
 interface MultiLevelSelectorProps {
   onChange: (values: Record<string, string>) => void;
-  contentType?: 'movie' | 'tv' | 'show';
+  contentType?: 'movie' | 'tv' | 'show' | 'anime-tv' | 'anime-movie';
 }
 
 const MultiLevelSelector: React.FC<MultiLevelSelectorProps> = ({
@@ -35,7 +35,9 @@ const MultiLevelSelector: React.FC<MultiLevelSelectorProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // 根据内容类型获取对应的类型选项
-  const getTypeOptions = (contentType: 'movie' | 'tv' | 'show') => {
+  const getTypeOptions = (
+    contentType: 'movie' | 'tv' | 'show' | 'anime-tv' | 'anime-movie'
+  ) => {
     const baseOptions = [{ label: '全部', value: 'all' }];
 
     switch (contentType) {
@@ -46,7 +48,6 @@ const MultiLevelSelector: React.FC<MultiLevelSelectorProps> = ({
           { label: '爱情', value: 'romance' },
           { label: '动作', value: 'action' },
           { label: '科幻', value: 'sci-fi' },
-          { label: '动画', value: 'animation' },
           { label: '悬疑', value: 'suspense' },
           { label: '犯罪', value: 'crime' },
           { label: '惊悚', value: 'thriller' },
@@ -71,7 +72,6 @@ const MultiLevelSelector: React.FC<MultiLevelSelectorProps> = ({
           { label: '喜剧', value: 'comedy' },
           { label: '爱情', value: 'romance' },
           { label: '悬疑', value: 'suspense' },
-          { label: '动画', value: 'animation' },
           { label: '武侠', value: 'wuxia' },
           { label: '古装', value: 'costume' },
           { label: '家庭', value: 'family' },
@@ -98,17 +98,22 @@ const MultiLevelSelector: React.FC<MultiLevelSelectorProps> = ({
           { label: '音乐', value: 'music' },
           { label: '歌舞', value: 'musical' },
         ];
+      case 'anime-tv':
+      case 'anime-movie':
       default:
         return baseOptions;
     }
   };
 
   // 根据内容类型获取对应的地区选项
-  const getRegionOptions = (contentType: 'movie' | 'tv' | 'show') => {
+  const getRegionOptions = (
+    contentType: 'movie' | 'tv' | 'show' | 'anime-tv' | 'anime-movie'
+  ) => {
     const baseOptions = [{ label: '全部', value: 'all' }];
 
     switch (contentType) {
       case 'movie':
+      case 'anime-movie':
         return [
           ...baseOptions,
           { label: '华语', value: 'chinese' },
@@ -135,6 +140,7 @@ const MultiLevelSelector: React.FC<MultiLevelSelectorProps> = ({
           { label: '丹麦', value: 'denmark' },
         ];
       case 'tv':
+      case 'anime-tv':
       case 'show':
         return [
           ...baseOptions,
@@ -168,13 +174,16 @@ const MultiLevelSelector: React.FC<MultiLevelSelectorProps> = ({
   };
 
   // 根据内容类型获取对应的平台选项
-  const getPlatformOptions = (contentType: 'movie' | 'tv' | 'show') => {
+  const getPlatformOptions = (
+    contentType: 'movie' | 'tv' | 'show' | 'anime-tv' | 'anime-movie'
+  ) => {
     const baseOptions = [{ label: '全部', value: 'all' }];
 
     switch (contentType) {
       case 'movie':
         return baseOptions; // 电影不需要平台选项
       case 'tv':
+      case 'anime-tv':
       case 'show':
         return [
           ...baseOptions,
@@ -197,11 +206,15 @@ const MultiLevelSelector: React.FC<MultiLevelSelectorProps> = ({
 
   // 分类配置
   const categories: MultiLevelCategory[] = [
-    {
-      key: 'type',
-      label: '类型',
-      options: getTypeOptions(contentType),
-    },
+    ...(contentType !== 'anime-tv' && contentType !== 'anime-movie'
+      ? [
+          {
+            key: 'type',
+            label: '类型',
+            options: getTypeOptions(contentType),
+          },
+        ]
+      : []),
     {
       key: 'region',
       label: '地区',
@@ -230,7 +243,9 @@ const MultiLevelSelector: React.FC<MultiLevelSelectorProps> = ({
       ],
     },
     // 只在电视剧和综艺时显示平台选项
-    ...(contentType === 'tv' || contentType === 'show'
+    ...(contentType === 'tv' ||
+    contentType === 'show' ||
+    contentType === 'anime-tv'
       ? [
           {
             key: 'platform',
