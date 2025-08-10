@@ -69,6 +69,7 @@ function DoubanPageClient() {
     region: 'all',
     year: 'all',
     platform: 'all',
+    label: 'all',
     sort: 'T',
   });
 
@@ -164,6 +165,7 @@ function DoubanPageClient() {
       region: 'all',
       year: 'all',
       platform: 'all',
+      label: 'all',
       sort: 'T',
     });
 
@@ -287,6 +289,9 @@ function DoubanPageClient() {
             ? (multiLevelValues.platform as string)
             : '',
           sort: multiLevelValues.sort ? (multiLevelValues.sort as string) : '',
+          label: multiLevelValues.label
+            ? (multiLevelValues.label as string)
+            : '',
         });
       } else if (primarySelection === '全部') {
         data = await getDoubanRecommends({
@@ -425,6 +430,9 @@ function DoubanPageClient() {
               sort: multiLevelValues.sort
                 ? (multiLevelValues.sort as string)
                 : '',
+              label: multiLevelValues.label
+                ? (multiLevelValues.label as string)
+                : '',
             });
           } else if (primarySelection === '全部') {
             data = await getDoubanRecommends({
@@ -535,6 +543,7 @@ function DoubanPageClient() {
           region: 'all',
           year: 'all',
           platform: 'all',
+          label: 'all',
           sort: 'T',
         });
 
