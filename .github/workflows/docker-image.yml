@@ -61,6 +61,13 @@ jobs:
         id: lowercase
         run: echo "owner=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
 
+      - name: Get version from VERSION.txt
+        id: version
+        run: |
+          VERSION=$(cat VERSION.txt | tr -d '[:space:]')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Current version: $VERSION"
+
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -69,6 +76,7 @@ jobs:
           tags: |
             type=ref,event=pr
             type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value={{steps.version.outputs.version}}
 
       - name: Build and push by digest
         id: build
@@ -120,6 +128,13 @@ jobs:
         id: lowercase
         run: echo "owner=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
 
+      - name: Get version from VERSION.txt
+        id: version
+        run: |
+          VERSION=$(cat VERSION.txt | tr -d '[:space:]')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Current version: $VERSION"
+
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -128,6 +143,7 @@ jobs:
           tags: |
             type=ref,event=pr,prefix=pr-
             type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value={{steps.version.outputs.version}}
 
       - name: Create manifest list and push
         working-directory: /tmp/digests
