@@ -32,7 +32,7 @@
     "@heroicons/react": "^2.2.0",
     "@upstash/redis": "^1.25.0",
     "@vidstack/react": "^1.12.13",
-    "artplayer": "^5.2.3",
+    "artplayer": "^5.2.5",
     "clsx": "^2.0.0",
     "framer-motion": "^12.18.1",
     "he": "^1.2.0",
