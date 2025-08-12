@@ -83,7 +83,7 @@ jobs:
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ github.event_name == 'pull_request_target' && format('ghcr.io/{0}/moontv:pr-{1}', steps.lowercase.outputs.owner, github.event.number) || format('ghcr.io/{0}/moontv:{1}', steps.lowercase.outputs.owner, env.latest_tag) }}
-          outputs: type=image,name=ghcr.io/${{ steps.lowercase.outputs.owner }}/moontv,name-canonical=true,push=${{ github.event_name != 'pull_request_target' }}
+          outputs: type=image,name=ghcr.io/${{ steps.lowercase.outputs.owner }}/moontv,name-canonical=true,push=true
 
       - name: Export digest
         run: |
@@ -165,7 +165,6 @@ jobs:
         with:
           images: ghcr.io/${{ steps.lowercase.outputs.owner }}/moontv
           tags: |
-            type=ref,event=pr,prefix=pr-
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Create manifest list and push
